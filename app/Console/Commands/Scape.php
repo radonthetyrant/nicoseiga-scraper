@@ -53,7 +53,7 @@ class Scrape extends Command
      *
      * @var string
      */
-    protected $description = 'Scrape from http://seiga.nicovideo.jp/';
+    protected $description = 'Scrape images from http://seiga.nicovideo.jp/';
 
     /**
      * Create a new command instance.

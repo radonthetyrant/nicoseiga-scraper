@@ -1,7 +1,7 @@
-## Image scraper for http://seiga.nicovideo.jp/
+## Image scraper cli tool for http://seiga.nicovideo.jp/
 
 ### Usage
 
-First clone this project, run `composer install`
+Clone this project, run `composer install`
 
-See `php artisan scrape -h`
+Run `php artisan scrape -h` for usage details.
