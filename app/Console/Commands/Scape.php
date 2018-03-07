@@ -151,7 +151,7 @@ class Scrape extends Command
             ->attr('data-src');
 
         $this->store($id, $imgUri);
-        sleep(0.5);
+        sleep(1);
     }
 
     /**
@@ -172,7 +172,7 @@ class Scrape extends Command
         }
 
         try {
-            Image::make($imgHost . '/' . $imgUri)->save(storage_path('app/' . $this->storeDestination . '/' . time() . '.jpg'));
+            Image::make($imgHost . '/' . $imgUri)->save(storage_path('app/' . $this->storeDestination . '/' . microtime() . '_' . $id . '.jpg'));
             $this->success++;
         } catch (\Exception $e) {
             $this->error('Failure occurred! Exception: ' . get_class($e));
