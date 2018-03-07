@@ -44,8 +44,8 @@ class Scrape extends Command
     protected $signature = 'scrape
                             {--id= : The illust id <required>}
                             {--start-page= : First page to start}
-                            {--end-page= : Last page}
-                            {--sort= : Sort images by, default "image_view", accept: "image_created", "image_view"}
+                            {--end-page= : The end page}
+                            {--sort= : Sort images by, default "image_view", expect: "image_created", "image_view"}
                             {--session= : User session cookie value for authentication}';
 
     /**
