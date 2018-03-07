@@ -145,23 +145,23 @@ class Scrape extends Command
      */
     protected function saveImage($id)
     {
-        $imgHost = 'https://lohas.nicoseiga.jp';
         $imgUri = $this->client
             ->request('GET', 'http://seiga.nicovideo.jp/image/source/' . $id)
             ->filter('.illust_view_big')
             ->attr('data-src');
 
-        $this->store($id, $imgHost, $imgUri);
+        $this->store($id, $imgUri);
+        sleep(0.5);
     }
 
     /**
      * @param     $id
-     * @param     $imgHost
      * @param     $imgUri
      * @param int $tries
      */
-    protected function store($id, $imgHost, $imgUri, $tries = 0): void
+    protected function store($id, $imgUri, $tries = 0): void
     {
+        $imgHost = 'https://lohas.nicoseiga.jp';
         $tries++;
         $this->tries++;
         $this->info('Start with image ID: ' . $id);
@@ -179,7 +179,7 @@ class Scrape extends Command
             $this->failure++;
             if ($tries <= 3) {
                 $this->error('Retrying... ' . $tries . ' time');
-                $this->store($id, $imgHost, $imgUri, $tries);
+                $this->store($id, $imgUri, $tries);
             }
         }
     }
