@@ -177,7 +177,7 @@ class Scrape extends Command
         } catch (\Exception $e) {
             $this->error('Failure occurred! Exception: ' . get_class($e));
             $this->failure++;
-            if ($tries < 3) {
+            if ($tries <= 3) {
                 $this->error('Retrying... ' . $tries . ' time');
                 $this->store($id, $imgHost, $imgUri, $tries);
             }
