@@ -151,18 +151,36 @@ class Scrape extends Command
             ->filter('.illust_view_big')
             ->attr('data-src');
 
+        $this->store($id, $imgHost, $imgUri);
+    }
+
+    /**
+     * @param     $id
+     * @param     $imgHost
+     * @param     $imgUri
+     * @param int $tries
+     */
+    protected function store($id, $imgHost, $imgUri, $tries = 0): void
+    {
+        $tries++;
+        $this->tries++;
+        $this->info('Start with image ID: ' . $id);
+
+        if (! Storage::exists($this->storeDestination)) {
+            Storage::makeDirectory($this->storeDestination);
+            $this->info('Generate folder ' . storage_path($this->storeDestination) . '/');
+        }
+
         try {
-            $this->tries++;
-            $this->info('Start with image ID: ' . $id);
-            if (! Storage::exists($this->storeDestination)) {
-                Storage::makeDirectory($this->storeDestination);
-                $this->info('Generate folder ' . storage_path($this->storeDestination) . '/');
-            }
             Image::make($imgHost . '/' . $imgUri)->save(storage_path('app/' . $this->storeDestination . '/' . time() . '.jpg'));
             $this->success++;
         } catch (\Exception $e) {
             $this->error('Failure occurred! Exception: ' . get_class($e));
             $this->failure++;
+            if ($tries < 3) {
+                $this->error('Retrying... ' . $tries . ' time');
+                $this->store($id, $imgHost, $imgUri, $tries);
+            }
         }
     }
 }
