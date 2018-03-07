@@ -107,7 +107,7 @@ class Scrape extends Command
             }
         }
         $this->info('Job finished with ' . $this->success . '/' . $this->tries . ' success and ' . $this->failure . ' failure');
-        $this->info($this->success . ' images saved in ' . storage_path($this->storeDestination) . '/');
+        $this->info($this->success . ' images saved in ' . storage_path('app/' . $this->storeDestination) . '/');
     }
 
     /**
