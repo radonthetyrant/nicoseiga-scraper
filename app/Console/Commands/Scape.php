@@ -172,7 +172,7 @@ class Scrape extends Command
         }
 
         try {
-            Image::make($imgHost . '/' . $imgUri)->save(storage_path('app/' . $this->storeDestination . '/' . microtime() . '_' . $id . '.jpg'));
+            Image::make($imgHost . '/' . $imgUri)->save(storage_path('app/' . $this->storeDestination . '/' . round(microtime(true) * 1000) . '_' . $id . '.jpg'));
             $this->success++;
         } catch (\Exception $e) {
             $this->error('Failure occurred! Exception: ' . get_class($e));
